@@ -1,5 +1,4 @@
 import { Grid, makeStyles, Theme, createStyles } from "@material-ui/core";
-import { useDispatch } from "react-redux";
 import { useTypedSelector } from "../../hooks/useTypedSelector";
 import TodoItem from "./TodoItem";
 

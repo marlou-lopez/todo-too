@@ -1,7 +1,7 @@
 import { useDispatch } from "react-redux";
 import { Todo } from "../../types";
 import { deleteTodo, toggleTodo } from "../../redux/action-creators";
-import { createStyles, Grid, makeStyles, Paper, Theme, Typography, Radio } from "@material-ui/core";
+import { createStyles, Grid, makeStyles, Paper, Theme, Typography } from "@material-ui/core";
 import CheckCircleIcon from '@material-ui/icons/CheckCircle';
 import RadioButtonUncheckedIcon from '@material-ui/icons/RadioButtonUnchecked';
 import EditIcon from '@material-ui/icons/Edit';
