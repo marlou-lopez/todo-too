@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { v4 as uuid } from 'uuid';
 import { addTodo } from '../../redux/action-creators';
@@ -19,6 +20,12 @@ const TodoContainer: React.FC = () => {
     )
 
     setContent('')
+  }
+
+  const testf = () => {
+    useEffect(() => {
+      console.log('test')
+    },[])
   }
 
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
