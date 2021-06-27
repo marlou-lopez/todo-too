@@ -22,12 +22,6 @@ const TodoContainer: React.FC = () => {
     setContent('')
   }
 
-  const testf = () => {
-    useEffect(() => {
-      console.log('test')
-    },[])
-  }
-
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setContent(e.target.value)
   }
