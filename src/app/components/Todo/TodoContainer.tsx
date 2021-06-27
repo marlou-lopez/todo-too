@@ -1,38 +1,21 @@
-import React, { useState } from 'react';
-import { useDispatch } from 'react-redux';
-import { v4 as uuid } from 'uuid';
-import { addTodo } from '../../redux/action-creators';
+import { Grid } from '@material-ui/core';
+import React from 'react';
+import TodoForm from './TodoForm';
 import TodoList from './TodoList';
 
 const TodoContainer: React.FC = () => {
-  const dispatch = useDispatch();
-  const [content, setContent] = useState<string>('');
-
-  const onSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    dispatch(
-      addTodo({
-        id: uuid(),
-        content,
-        done: false
-      })
-    )
-
-    setContent('')
-  }
-
-  const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setContent(e.target.value)
-  }
-
   return (
-    <div>
-      <form onSubmit={onSubmit}>
-        <input type='text' value={content} onChange={onChange}/>
-        <button type='submit'>Submit</button>
-      </form>
-      <TodoList />
-    </div>
+    <React.Fragment>
+      <h3>Todo Too</h3>
+      <Grid container spacing={3}>
+        <Grid item xs={6}>
+          <TodoForm />
+        </Grid>
+        <Grid item xs={6}>
+          <TodoList />
+        </Grid>
+      </Grid>
+    </React.Fragment>
   )
 };
 
