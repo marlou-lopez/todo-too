@@ -1,35 +1,30 @@
+import { Grid, makeStyles, Theme, createStyles } from "@material-ui/core";
 import { useDispatch } from "react-redux";
 import { useTypedSelector } from "../../hooks/useTypedSelector";
-import { deleteTodo, toggleTodo } from "../../redux/action-creators";
+import TodoItem from "./TodoItem";
+
+const useStyle = makeStyles((theme: Theme) => {
+  return createStyles({
+    list: {
+      '& div:not(:first-child)': {
+        marginTop: theme.spacing(1)
+      }
+    }
+  })
+})
 
 const TodoList: React.FC = () => {
-  const dispatch = useDispatch()
+  const classes = useStyle();
   const todos = useTypedSelector((state) => state.todos.todos);
 
-  const handleDelete = (id: string) => {
-    dispatch(deleteTodo(id))
-  }
-
-  const handleToggle = (id: string) => {
-    dispatch(toggleTodo(id))
-  }
-
   return (
-    <ul>
+    <Grid className={classes.list}>
       {todos.map((todo) => {
         return (
-          <li key={todo.id}>
-            <p
-              style={{
-                textDecoration: todo.done ? 'line-through' : 'none'
-              }}
-              onClick={(e) => handleToggle(todo.id)}
-            >{todo.content}</p>
-            <button onClick={(e) => handleDelete(todo.id)}>delete</button>
-          </li>
+          <TodoItem {...todo} />
         )
       })}
-    </ul>
+    </Grid>
   )
 };
 
