@@ -5,7 +5,7 @@ import TodoItem from "./TodoItem";
 const useStyle = makeStyles((theme: Theme) => {
   return createStyles({
     list: {
-      '& div:not(:first-child)': {
+      '& > div:not(:first-child)': {
         marginTop: theme.spacing(1)
       }
     }
