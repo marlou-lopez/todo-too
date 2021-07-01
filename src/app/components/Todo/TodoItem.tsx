@@ -18,7 +18,10 @@ const useStyle = makeStyles((theme: Theme) => {
       display: 'flex'
     },
     content: {
-      padding: theme.spacing(2.5)
+      padding: theme.spacing(2.5),
+      '& .text': {
+        width: '80%',
+      }
     },
     action: {
       display: 'flex',
@@ -57,7 +60,7 @@ const TodoItem: React.FC<Todo> = ({ id, content, done }) => {
   }
 
   return (
-    <Paper key={id} className={classes.paper} >
+    <Paper key={id} className={classes.paper} elevation={2} >
       <Grid
         container
         wrap='nowrap'
@@ -65,13 +68,12 @@ const TodoItem: React.FC<Todo> = ({ id, content, done }) => {
         alignItems='center'
         className={classes.content}
       >
-        <Grid item>
+        <Grid item className='text'>
           <Typography
             style={{
               textDecoration: done ? 'line-through' : 'none'
             }}
             noWrap
-
           >{content}</Typography>
         </Grid>
         <Grid item className={classes.action}>
@@ -81,7 +83,6 @@ const TodoItem: React.FC<Todo> = ({ id, content, done }) => {
               : <RadioButtonUncheckedIcon color='primary' onClick={(e) => handleToggle(id)} />
           }
           {!openMenu ? <MoreVertIcon color='primary' onClick={(e) => setOpenMenu(true)} /> : null}
-          {/* <button onClick={(e) => handleDelete(id)}>delete</button> */}
         </Grid>
       </Grid>
       <Grid className={clsx(classes.moreMenu, {'expanded': openMenu})}>

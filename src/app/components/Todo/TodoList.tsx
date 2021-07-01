@@ -20,7 +20,7 @@ const TodoList: React.FC = () => {
     <Grid className={classes.list}>
       {todos.map((todo) => {
         return (
-          <TodoItem {...todo} />
+          <TodoItem  {...todo} id={todo.id} />
         )
       })}
     </Grid>
