@@ -1,28 +1,19 @@
-import { createStyles, Grid, makeStyles, Paper, Theme, TextField } from '@material-ui/core';
+import { TextField } from '@material-ui/core';
+import { isEmpty } from 'lodash';
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { v4 as uuid } from 'uuid';
 import { addTodo } from '../../redux/action-creators';
 
-const useStyle = makeStyles((theme: Theme) => {
-  return createStyles({
-    container: {
-      height: theme.spacing(100),
-    },
-    form: {
-      width: 'inherit',
-      padding: theme.spacing(1)
-    }
-  })
-})
-
 const TodoForm: React.FC = () => {
-  const classes = useStyle();
   const dispatch = useDispatch();
   const [content, setContent] = useState<string>('');
 
   const onSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+    if (isEmpty(content)) {
+      return;
+    }
     dispatch(
       addTodo({
         id: uuid(),
@@ -38,29 +29,25 @@ const TodoForm: React.FC = () => {
     setContent(e.target.value)
   }
 
+  const textAreaOnEnter = (e: any) => {
+    if (e.keyCode === 13 && !e.shiftKey) {
+      onSubmit(e);
+    }
+  };
+
   return (
-    <Paper>
-      <Grid
-        container
-        justify='center'
-        alignItems='center'
-        classes={{
-          root: classes.container
-        }}
-      >
-        <form
-          className={classes.form}
-          onSubmit={onSubmit}>
-          <TextField
-            variant='outlined'
-            fullWidth
-            value={content}
-            onChange={onChange}
-            label='Add Todo'  
-          />
-        </form>
-      </Grid>
-    </Paper>
+    <form
+      onSubmit={onSubmit}>
+      <TextField
+        variant='outlined'
+        fullWidth
+        value={content}
+        multiline
+        onChange={onChange}
+        label='Add Todo'
+        onKeyDown={textAreaOnEnter}
+      />
+    </form>
   )
 }
 
