@@ -43,7 +43,7 @@ const TodoContainer: React.FC = () => {
   const classes = useStyle();
   return (
     <React.Fragment>
-      <h3>Todo Too</h3>
+      <h3 id='todo-app-title'>Todo Too</h3>
       <Grid container>
         <Grid item xs={12}>
           <Paper className={classes.paper}>

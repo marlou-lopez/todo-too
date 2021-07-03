@@ -4,7 +4,6 @@ import TodoContainer from './components/Todo/TodoContainer';
 import theme from './theme';
 
 const App: React.FC = () => {
-  console.log(theme)
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
