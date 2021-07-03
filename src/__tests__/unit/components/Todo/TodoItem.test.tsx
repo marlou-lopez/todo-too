@@ -1,4 +1,4 @@
-import { mount, shallow } from 'enzyme';
+import { shallow } from 'enzyme';
 import TodoItem from '../../../../app/components/Todo/TodoItem'
 
 describe('TodoItem component unit tests', () => {
@@ -81,14 +81,21 @@ describe('TodoItem component unit tests', () => {
       <TodoItem
         id='test-id'
         content='test-content'
-        done
+        done={false}
         handleDelete={jest.fn()}
         handleToggle={handleToggleSpy}
       />
     );
 
-    const radioBtn = component.find('#unchecked-circle-test-id');
-    radioBtn.simulate('click');
+    const uncheckedRadioBtn = component.find('#unchecked-circle-test-id');
+    uncheckedRadioBtn.simulate('click');
+
+    expect(handleToggleSpy).toHaveBeenCalled();
+    expect(handleToggleSpy).toHaveBeenCalledWith('test-id');
+    component.setProps({ done: true });
+
+    const checkedRadioBtn = component.find('#checked-circle-test-id');
+    checkedRadioBtn.simulate('click');
 
     expect(handleToggleSpy).toHaveBeenCalled();
     expect(handleToggleSpy).toHaveBeenCalledWith('test-id');

@@ -1,6 +1,4 @@
-import { useDispatch } from "react-redux";
 import { Todo } from "../../types";
-import { deleteTodo, toggleTodo } from "../../redux/action-creators";
 import { createStyles, Grid, makeStyles, Paper, Theme, Typography } from "@material-ui/core";
 import CheckCircleIcon from '@material-ui/icons/CheckCircle';
 import RadioButtonUncheckedIcon from '@material-ui/icons/RadioButtonUnchecked';
@@ -72,8 +70,8 @@ const TodoItem: React.FC<Todo & {
         <Grid item className={classes.action}>
           {
             done ?
-              <CheckCircleIcon id={`unchecked-circle-${id}`} color='primary' onClick={(e) => handleToggle(id)} />
-              : <RadioButtonUncheckedIcon id={`checked-circle-${id}`} color='primary' onClick={(e) => handleToggle(id)} />
+              <CheckCircleIcon id={`checked-circle-${id}`} color='primary' onClick={(e) => handleToggle(id)} />
+              : <RadioButtonUncheckedIcon id={`unchecked-circle-${id}`} color='primary' onClick={(e) => handleToggle(id)} />
           }
           {!openMenu ? <MoreVertIcon id={`vertical-menu-${id}`} color='primary' onClick={(e) => {setOpenMenu(true)}} /> : null}
         </Grid>

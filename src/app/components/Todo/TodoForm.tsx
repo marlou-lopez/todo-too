@@ -1,6 +1,6 @@
 import { TextField } from '@material-ui/core';
 import { isEmpty } from 'lodash';
-import { useState } from 'react';
+import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { v4 as uuid } from 'uuid';
 import { addTodo } from '../../redux/action-creators';
@@ -29,8 +29,8 @@ const TodoForm: React.FC = () => {
     setContent(e.target.value)
   }
 
-  const textAreaOnEnter = (e: any) => {
-    if (e.keyCode === 13 && !e.shiftKey) {
+  const textAreaOnEnter = (e: React.KeyboardEvent) => {
+    if (e.key === 'Enter' && !e.shiftKey) {
       onSubmit(e);
     }
   };
@@ -39,6 +39,7 @@ const TodoForm: React.FC = () => {
     <form
       onSubmit={onSubmit}>
       <TextField
+        id='todo-textfield'
         variant='outlined'
         fullWidth
         value={content}
