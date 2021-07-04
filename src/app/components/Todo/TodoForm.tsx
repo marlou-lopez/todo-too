@@ -5,7 +5,9 @@ import { useDispatch } from 'react-redux';
 import { v4 as uuid } from 'uuid';
 import { addTodo } from '../../redux/action-creators';
 
-const TodoForm: React.FC = () => {
+const TodoForm: React.FC<{
+  defaultContent?: string
+}> = ({defaultContent}) => {
   const dispatch = useDispatch();
   const [content, setContent] = useState<string>('');
 
