@@ -2,13 +2,9 @@ import { TodoAction } from "../actions/todoAction"
 import { TodoActionTypes } from "../action-types"
 import { Todo } from "../../types"
 
-interface TodoState {
-  todos: Todo[]
-}
+export type TodoState = Todo[]
 
-const initialState: TodoState = {
-  todos: []
-}
+const initialState: TodoState = []
 
 const todoReducer = (
   state = initialState,
@@ -16,35 +12,28 @@ const todoReducer = (
 ): TodoState => {
   switch(action.type) {
     case TodoActionTypes.ADD_TODO: {
-      console.log('test');
-      return {
+      return [
         ...state,
-        todos: [...state.todos, action.payload]
-      }
+        action.payload
+      ]
     }
     case TodoActionTypes.UPDATE_TODO: {
-      const temp = state.todos.map((todo) => {
+      const temp = state.map((todo) => {
         if (action.payload.id === todo.id) {
           return action.payload
         }
         return todo
       })
-      return {
-        ...state,
-        todos: temp
-      }
+      return temp;
     }
     case TodoActionTypes.DELETE_TODO: {
-      const temp = state.todos.filter((todo) => {
+      const temp = state.filter((todo) => {
         return todo.id !== action.payload.id
       });
-      return {
-        ...state,
-        todos: temp,
-      }
+      return temp;
     }
     case TodoActionTypes.TOGGLE_TODO: {
-      const temp = state.todos.map((todo) => {
+      const temp = state.map((todo) => {
         if (action.payload.id === todo.id) {
           return {
             ...todo,
@@ -53,10 +42,7 @@ const todoReducer = (
         }
         return todo
       })
-      return {
-        ...state,
-        todos: temp
-      }
+      return temp
     }
     default:
       return state;
