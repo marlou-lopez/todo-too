@@ -17,7 +17,7 @@ const useStyle = makeStyles((theme: Theme) => {
 const TodoList: React.FC = () => {
   const classes = useStyle();
   const dispatch = useDispatch();
-  const todos = useTypedSelector((state) => state.todos.todos);
+  const todos = useTypedSelector((state) => state.todos);
 
   return (
     <Grid className={classes.list}>
