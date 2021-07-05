@@ -1,4 +1,4 @@
-import { addTodo, deleteTodo, selectTodo, toggleTodo } from "../../../../app/redux/action-creators";
+import { addTodo, deleteTodo, selectTodo, toggleTodo, unselectTodo, updateTodo } from "../../../../app/redux/action-creators";
 import todoReducer, { TodoState } from "../../../../app/redux/reducers/todoReducer"
 
 const initialState: TodoState = {
@@ -32,6 +32,37 @@ describe('todoReducer unit test', () => {
       list: [{
         id: 'test-id-one',
         content: 'test-content-one',
+        done: false
+      }],
+      selected: {
+        id: '',
+        content: '',
+        done: false
+      }
+    })
+  });
+
+  it('should handle updating of todo', () => {
+    const previousState: TodoState = {
+      list: [{
+        id: 'test-id-one',
+        content: 'test-content-one',
+        done: false
+      }],
+      selected: {
+        id: '',
+        content: '',
+        done: false
+      }
+    }
+    expect(todoReducer(previousState, updateTodo({
+      id: 'test-id-one',
+      content: 'test-content-one-update',
+      done: false
+    }))).toEqual({
+      list: [{
+        id: 'test-id-one',
+        content: 'test-content-one-update',
         done: false
       }],
       selected: {
@@ -135,6 +166,41 @@ describe('todoReducer unit test', () => {
         id: 'test-id-one',
         content: 'test-content-one',
         done: true
+      }
+    })
+  });
+
+  it('should handle unselection of todo', () => {
+    const previousState: TodoState = {
+      list: [{
+        id: 'test-id-one',
+        content: 'test-content-one',
+        done: true
+      }, {
+        id: 'test-id-two',
+        content: 'test-content-two',
+        done: false
+      }],
+      selected: {
+        id: 'test-id-one',
+        content: 'test-content-one',
+        done: true
+      }
+    }
+    expect(todoReducer(previousState, unselectTodo())).toEqual({
+      list: [{
+        id: 'test-id-one',
+        content: 'test-content-one',
+        done: true
+      }, {
+        id: 'test-id-two',
+        content: 'test-content-two',
+        done: false
+      }],
+      selected: {
+        id: '',
+        content: '',
+        done: false
       }
     })
   })
