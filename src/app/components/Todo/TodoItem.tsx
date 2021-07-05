@@ -1,5 +1,5 @@
 import { Todo } from "../../types";
-import { createStyles, Grid, makeStyles, Paper, Theme, Typography, Dialog } from "@material-ui/core";
+import { createStyles, Grid, makeStyles, Paper, Theme, Typography } from "@material-ui/core";
 import CheckCircleIcon from '@material-ui/icons/CheckCircle';
 import RadioButtonUncheckedIcon from '@material-ui/icons/RadioButtonUnchecked';
 import EditIcon from '@material-ui/icons/Edit';
@@ -9,13 +9,12 @@ import MoreVertIcon from '@material-ui/icons/MoreVert';
 import React from "react";
 import { useState } from "react";
 import clsx from "clsx";
-import TodoModal from "./TodoModal";
 
 const useStyle = makeStyles((theme: Theme) => {
   return createStyles({
     paper: {
       display: 'flex',
-      cursor: 'pointer'
+      cursor: 'pointer',
     },
     content: {
       '& .text': {

@@ -1,5 +1,4 @@
-import { createStyles, Dialog, Grid, makeStyles, Theme } from "@material-ui/core";
-import { useTypedSelector } from "../../hooks/useTypedSelector";
+import { createStyles, Dialog, makeStyles, Theme } from "@material-ui/core";
 import { Todo } from "../../types";
 import TodoForm from "./TodoForm";
 
@@ -29,7 +28,7 @@ const TodoModal: React.FC<TodoModalProps> = ({selectedTodo, handleCloseModal, op
         paper: classes.modalPaper
       }}
     >
-      <TodoForm defaultContent={selectedTodo.content} />
+      <TodoForm todo={selectedTodo} update />
     </Dialog>
   )
 };

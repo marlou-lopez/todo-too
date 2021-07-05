@@ -3,27 +3,41 @@ import { isEmpty } from 'lodash';
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { v4 as uuid } from 'uuid';
-import { addTodo } from '../../redux/action-creators';
+import { addTodo, updateTodo } from '../../redux/action-creators';
+import { Todo } from '../../types';
 
-const TodoForm: React.FC<{
-  defaultContent?: string
-}> = ({defaultContent}) => {
+interface TodoFormProps {
+  // onSubmitAction: () => void;
+  update?: boolean;
+  todo?: Todo;
+}
+
+const TodoForm: React.FC<TodoFormProps> = ({todo, update = false}) => {
   const dispatch = useDispatch();
-  const [content, setContent] = useState<string>('');
+  const [content, setContent] = useState<string>(todo?.content || '');
 
   const onSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (isEmpty(content)) {
       return;
     }
-    dispatch(
-      addTodo({
-        id: uuid(),
-        content,
-        done: false
-      })
-    )
-
+    if (update) {
+      dispatch(
+        updateTodo({
+          id: todo?.id || '',
+          content,
+          done: todo?.done || false
+        })
+      )
+    } else {
+      dispatch(
+        addTodo({
+          id: uuid(),
+          content,
+          done: false
+        })
+      )
+    }
     setContent('')
   }
 
@@ -45,9 +59,8 @@ const TodoForm: React.FC<{
         variant='outlined'
         fullWidth
         value={content}
-        multiline
         onChange={onChange}
-        label='Add Todo'
+        label={update ? 'Update todo' : 'Add todo'}
         onKeyDown={textAreaOnEnter}
       />
     </form>

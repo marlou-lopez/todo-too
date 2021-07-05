@@ -11,6 +11,13 @@ export const addTodo = (todo: Todo): TodoAction => {
   }
 }
 
+export const updateTodo = (todo: Todo): TodoAction => {
+  return {
+    type: TodoActionTypes.UPDATE_TODO,
+    payload: todo
+  }
+}
+
 export const deleteTodo = (id: string): TodoAction => {
   return {
     type: TodoActionTypes.DELETE_TODO,
