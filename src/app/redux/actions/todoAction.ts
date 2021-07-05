@@ -1,5 +1,5 @@
-import { Todo } from "../../types";
-import { TodoActionTypes } from "../action-types";
+import { Todo } from '../../types';
+import TodoActionTypes from '../action-types/todo';
 
 interface AddTodoAction {
   type: TodoActionTypes.ADD_TODO,
@@ -39,4 +39,4 @@ export type TodoAction =
   | DeleteTodoAction
   | ToggleTodoAction
   | SelectTodoAction
-  | UnselectTodoAction
+  | UnselectTodoAction;

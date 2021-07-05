@@ -1,9 +1,10 @@
-
-export enum TodoActionTypes {
+enum TodoActionTypes {
   ADD_TODO = 'ADD_TODO',
   UPDATE_TODO = 'UPDATE_TODO',
   DELETE_TODO = 'DELETE_TODO',
   TOGGLE_TODO = 'TOGGLE_TODO',
   SELECT_TODO = 'SELECT_TODO',
-  UNSELECT_TODO = 'UNSELECT_TODO'
+  UNSELECT_TODO = 'UNSELECT_TODO',
 }
+
+export default TodoActionTypes;

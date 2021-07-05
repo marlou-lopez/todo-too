@@ -1,6 +1,6 @@
+import React, { useState } from 'react';
 import { TextField } from '@material-ui/core';
 import { isEmpty } from 'lodash';
-import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { v4 as uuid } from 'uuid';
 import { addTodo, updateTodo } from '../../redux/action-creators';
@@ -25,24 +25,24 @@ const TodoForm: React.FC<TodoFormProps> = ({ todo, update = false }) => {
         updateTodo({
           id: todo?.id || '',
           content,
-          done: todo?.done || false
-        })
-      )
+          done: todo?.done || false,
+        }),
+      );
     } else {
       dispatch(
         addTodo({
           id: uuid(),
           content,
-          done: false
-        })
+          done: false,
+        }),
       );
-      setContent('')
+      setContent('');
     }
-  }
+  };
 
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setContent(e.target.value)
-  }
+    setContent(e.target.value);
+  };
 
   const textAreaOnEnter = (e: React.KeyboardEvent) => {
     if (e.key === 'Enter' && !e.shiftKey) {
@@ -52,10 +52,11 @@ const TodoForm: React.FC<TodoFormProps> = ({ todo, update = false }) => {
 
   return (
     <form
-      onSubmit={onSubmit}>
+      onSubmit={onSubmit}
+    >
       <TextField
-        id='todo-textfield'
-        variant='outlined'
+        id="todo-textfield"
+        variant="outlined"
         fullWidth
         value={content}
         onChange={onChange}
@@ -63,7 +64,7 @@ const TodoForm: React.FC<TodoFormProps> = ({ todo, update = false }) => {
         onKeyDown={textAreaOnEnter}
       />
     </form>
-  )
-}
+  );
+};
 
 export default TodoForm;

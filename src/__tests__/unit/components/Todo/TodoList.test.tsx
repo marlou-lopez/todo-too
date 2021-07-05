@@ -1,8 +1,8 @@
 import { mount } from 'enzyme';
 import { Provider } from 'react-redux';
-import configureStore from 'redux-mock-store'
+import configureStore from 'redux-mock-store';
 import TodoItem from '../../../../app/components/Todo/TodoItem';
-import TodoList from '../../../../app/components/Todo/TodoList'
+import TodoList from '../../../../app/components/Todo/TodoList';
 import { RootState } from '../../../../app/redux/reducers';
 
 const mockStore = configureStore<RootState>();
@@ -19,27 +19,27 @@ describe('TodoList component unit tests', () => {
         {
           id: 'test-id-two',
           content: 'test-content-two',
-          done: false
-        }
+          done: false,
+        },
       ],
       selected: {
         id: '',
         content: '',
-        done: false
-      }
+        done: false,
+      },
     },
     modal: {
-      open: false
-    }
-  })
+      open: false,
+    },
+  });
 
   it('should render list', () => {
     const component = mount(
       <Provider store={store}>
         <TodoList />
-      </Provider>
+      </Provider>,
     );
     const todoItems = component.find(TodoItem);
-    expect(todoItems.length).toEqual(2)
+    expect(todoItems.length).toEqual(2);
   });
-})
+});
