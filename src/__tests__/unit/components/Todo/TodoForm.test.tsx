@@ -1,7 +1,7 @@
 import { mount } from 'enzyme';
 import { Provider } from 'react-redux';
-import configureStore from 'redux-mock-store'
-import TodoForm from '../../../../app/components/Todo/TodoForm'
+import configureStore from 'redux-mock-store';
+import TodoForm from '../../../../app/components/Todo/TodoForm';
 import { RootState } from '../../../../app/redux/reducers';
 
 const mockStore = configureStore<RootState>();
@@ -18,25 +18,25 @@ describe('TodoForm component unit tests', () => {
         {
           id: 'test-id-two',
           content: 'test-content-two',
-          done: false
-        }
+          done: false,
+        },
       ],
       selected: {
         id: 'test-id-two',
         content: 'test-content-two',
-        done: false
+        done: false,
       },
     },
     modal: {
-      open: false
-    }
+      open: false,
+    },
   });
 
   it('should render form', () => {
     const component = mount(
       <Provider store={store}>
         <TodoForm />
-      </Provider>
+      </Provider>,
     );
 
     expect(component.exists()).toBeTruthy();
@@ -46,79 +46,82 @@ describe('TodoForm component unit tests', () => {
     const component = mount(
       <Provider store={store}>
         <TodoForm />
-      </Provider>
+      </Provider>,
     );
 
     let textField = component.find('#todo-textfield').last();
     textField.simulate('change', {
       target: {
-        value: 'test value'
-      }
+        value: 'test value',
+      },
     });
 
     // re-find component to get changed value
-    textField = component.find('#todo-textfield').last()
-    expect(textField.prop('value')).toEqual('test value')
+    textField = component.find('#todo-textfield').last();
+    expect(textField.prop('value')).toEqual('test value');
   });
 
   it('should empty the value after submitting when it adding todo', () => {
     const component = mount(
       <Provider store={store}>
         <TodoForm />
-      </Provider>
+      </Provider>,
     );
 
     let textField = component.find('#todo-textfield').last();
     textField.simulate('change', {
       target: {
-        value: 'test value'
-      }
+        value: 'test value',
+      },
     });
 
     // re-find component to get changed value
-    textField = component.find('#todo-textfield').last()
-    expect(textField.prop('value')).toEqual('test value')
+    textField = component.find('#todo-textfield').last();
+    expect(textField.prop('value')).toEqual('test value');
 
     // Submit value by enter
     textField.simulate('keydown', {
-      key: 'Enter'
+      key: 'Enter',
     });
 
     // re-find component to get changed value
-    textField = component.find('#todo-textfield').last()
-    expect(textField.prop('value')).toEqual('')
+    textField = component.find('#todo-textfield').last();
+    expect(textField.prop('value')).toEqual('');
   });
 
   it('should not empty the value after submitting when it updating todo', () => {
     const component = mount(
       <Provider store={store}>
-        <TodoForm todo={{
-          id: 'test-id',
-          content: 'test',
-          done: false
-        }} update/>
-      </Provider>
+        <TodoForm
+          todo={{
+            id: 'test-id',
+            content: 'test',
+            done: false,
+          }}
+          update
+        />
+      </Provider>,
     );
 
     let textField = component.find('#todo-textfield').last();
     textField.simulate('change', {
       target: {
-        value: 'test value'
-      }
+        value: 'test value',
+      },
     });
 
     // re-find component to get changed value
-    textField = component.find('#todo-textfield').last()
-    expect(textField.prop('value')).toEqual('test value')
+    textField = component.find('#todo-textfield').last();
+    expect(textField.prop('value')).toEqual('test value');
 
     // Submit value by enter
     textField.simulate('keydown', {
-      key: 'Enter'
+      key: 'Enter',
     });
 
     // re-find component to get changed value
-    textField = component.find('#todo-textfield').last()
-    expect(textField.prop('value')).toEqual('test value')
+    textField = component.find('#todo-textfield').last();
+    expect(textField.prop('value')).toEqual('test value');
   });
 
   it('should not display label when updating todo', () => {
@@ -128,26 +131,26 @@ describe('TodoForm component unit tests', () => {
           todo={{
             id: 'test-id',
             content: 'test',
-            done: false
+            done: false,
           }}
           update
         />
-      </Provider>
+      </Provider>,
     );
 
     const textField = component.find('#todo-textfield').first();
-    expect(textField.prop('label')).toBeNull()
-  })
+    expect(textField.prop('label')).toBeNull();
+  });
 
   it('should display label when updating todo', () => {
     const component = mount(
       <Provider store={store}>
         <TodoForm />
-      </Provider>
+      </Provider>,
     );
 
     const textField = component.find('#todo-textfield').first();
     expect(textField.prop('label')).not.toBeNull();
-    expect(textField.prop('label')).toEqual('Add todo')
-  })
-})
+    expect(textField.prop('label')).toEqual('Add todo');
+  });
+});

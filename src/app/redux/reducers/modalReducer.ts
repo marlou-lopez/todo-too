@@ -1,34 +1,34 @@
-import { ModalActionTypes } from "../action-types/modal"
-import { ModalAction } from "../actions/modalAction"
+import ModalActionTypes from '../action-types/modal';
+import { ModalAction } from '../actions/modalAction';
 
 export type ModalState = {
   open: boolean;
-}
+};
 
 const initialState: ModalState = {
-  open: false
-}
+  open: false,
+};
 
 const modalReducer = (
   state = initialState,
-  action: ModalAction
+  action: ModalAction,
 ): ModalState => {
-  switch(action.type) {
+  switch (action.type) {
     case ModalActionTypes.OPEN_TODO_MODAL: {
       return {
         ...state,
-        open: true
-      }
+        open: true,
+      };
     }
     case ModalActionTypes.CLOSE_TODO_MODAL: {
       return {
         ...state,
-        open: false
-      }
+        open: false,
+      };
     }
     default:
       return state;
   }
-}
+};
 
 export default modalReducer;

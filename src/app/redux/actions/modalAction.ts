@@ -1,4 +1,4 @@
-import { ModalActionTypes } from "../action-types/modal";
+import ModalActionTypes from '../action-types/modal';
 
 interface OpenTodoModalAction {
   type: ModalActionTypes.OPEN_TODO_MODAL,

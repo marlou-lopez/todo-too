@@ -1,18 +1,22 @@
-import { addTodo, deleteTodo, selectTodo, toggleTodo, unselectTodo, updateTodo } from "../../../../app/redux/action-creators";
-import todoReducer, { TodoState } from "../../../../app/redux/reducers/todoReducer"
+import {
+  addTodo, deleteTodo, selectTodo, toggleTodo, unselectTodo, updateTodo,
+} from '../../../../app/redux/action-creators';
+import todoReducer, { TodoState } from '../../../../app/redux/reducers/todoReducer';
 
 const initialState: TodoState = {
   list: [],
   selected: {
     id: '',
     content: '',
-    done: false
-  }
-}
+    done: false,
+  },
+};
 
 describe('todoReducer unit test', () => {
   it('should return the initial state', () => {
-    expect(todoReducer(undefined, {} as any)).toEqual(initialState)
+    // for testing purposes
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    expect(todoReducer(undefined, {} as any)).toEqual(initialState);
   });
 
   it('should handle adding of todo', () => {
@@ -21,25 +25,25 @@ describe('todoReducer unit test', () => {
       selected: {
         id: '',
         content: '',
-        done: false
-      }
-    }
+        done: false,
+      },
+    };
     expect(todoReducer(previousState, addTodo({
       id: 'test-id-one',
       content: 'test-content-one',
-      done: false
+      done: false,
     }))).toEqual({
       list: [{
         id: 'test-id-one',
         content: 'test-content-one',
-        done: false
+        done: false,
       }],
       selected: {
         id: '',
         content: '',
-        done: false
-      }
-    })
+        done: false,
+      },
+    });
   });
 
   it('should handle updating of todo', () => {
@@ -47,30 +51,30 @@ describe('todoReducer unit test', () => {
       list: [{
         id: 'test-id-one',
         content: 'test-content-one',
-        done: false
+        done: false,
       }],
       selected: {
         id: '',
         content: '',
-        done: false
-      }
-    }
+        done: false,
+      },
+    };
     expect(todoReducer(previousState, updateTodo({
       id: 'test-id-one',
       content: 'test-content-one-update',
-      done: false
+      done: false,
     }))).toEqual({
       list: [{
         id: 'test-id-one',
         content: 'test-content-one-update',
-        done: false
+        done: false,
       }],
       selected: {
         id: '',
         content: '',
-        done: false
-      }
-    })
+        done: false,
+      },
+    });
   });
 
   it('should handle deleting of todo', () => {
@@ -78,22 +82,22 @@ describe('todoReducer unit test', () => {
       list: [{
         id: 'test-id-one',
         content: 'test-content-one',
-        done: false
+        done: false,
       }],
       selected: {
         id: '',
         content: '',
-        done: false
-      }
-    }
+        done: false,
+      },
+    };
     expect(todoReducer(previousState, deleteTodo('test-id-one'))).toEqual({
       list: [],
       selected: {
         id: '',
         content: '',
-        done: false
-      }
-    })
+        done: false,
+      },
+    });
   });
 
   it('should handle toggling of todo', () => {
@@ -101,73 +105,73 @@ describe('todoReducer unit test', () => {
       list: [{
         id: 'test-id-one',
         content: 'test-content-one',
-        done: false
+        done: false,
       }, {
         id: 'test-id-two',
         content: 'test-content-two',
-        done: false
+        done: false,
       }],
       selected: {
         id: '',
         content: '',
-        done: false
-      }
-    }
+        done: false,
+      },
+    };
     expect(todoReducer(previousState, toggleTodo('test-id-one'))).toEqual({
       list: [{
         id: 'test-id-one',
         content: 'test-content-one',
-        done: true
+        done: true,
       }, {
         id: 'test-id-two',
         content: 'test-content-two',
-        done: false
+        done: false,
       }],
       selected: {
         id: '',
         content: '',
-        done: false
-      }
+        done: false,
+      },
     });
   });
-  
+
   it('should handle selection of todo', () => {
     const previousState: TodoState = {
       list: [{
         id: 'test-id-one',
         content: 'test-content-one',
-        done: true
+        done: true,
       }, {
         id: 'test-id-two',
         content: 'test-content-two',
-        done: false
+        done: false,
       }],
       selected: {
         id: '',
         content: '',
-        done: false
-      }
-    }
+        done: false,
+      },
+    };
     expect(todoReducer(previousState, selectTodo({
       id: 'test-id-one',
       content: 'test-content-one',
-      done: true
+      done: true,
     }))).toEqual({
       list: [{
         id: 'test-id-one',
         content: 'test-content-one',
-        done: true
+        done: true,
       }, {
         id: 'test-id-two',
         content: 'test-content-two',
-        done: false
+        done: false,
       }],
       selected: {
         id: 'test-id-one',
         content: 'test-content-one',
-        done: true
-      }
-    })
+        done: true,
+      },
+    });
   });
 
   it('should handle unselection of todo', () => {
@@ -175,33 +179,33 @@ describe('todoReducer unit test', () => {
       list: [{
         id: 'test-id-one',
         content: 'test-content-one',
-        done: true
+        done: true,
       }, {
         id: 'test-id-two',
         content: 'test-content-two',
-        done: false
+        done: false,
       }],
       selected: {
         id: 'test-id-one',
         content: 'test-content-one',
-        done: true
-      }
-    }
+        done: true,
+      },
+    };
     expect(todoReducer(previousState, unselectTodo())).toEqual({
       list: [{
         id: 'test-id-one',
         content: 'test-content-one',
-        done: true
+        done: true,
       }, {
         id: 'test-id-two',
         content: 'test-content-two',
-        done: false
+        done: false,
       }],
       selected: {
         id: '',
         content: '',
-        done: false
-      }
-    })
-  })
-})
+        done: false,
+      },
+    });
+  });
+});

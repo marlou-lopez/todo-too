@@ -1,52 +1,50 @@
-import { TodoAction } from "../actions/todoAction"
-import { TodoActionTypes } from "../action-types"
-import { Todo } from "../../types"
+import { TodoAction } from '../actions/todoAction';
+import TodoActionTypes from '../action-types/todo';
+import { Todo } from '../../types';
 
 export type TodoState = {
   list: Todo[],
   selected: Todo
-}
+};
 
 const initialState: TodoState = {
   list: [],
   selected: {
     id: '',
     content: '',
-    done: false
-  }
-}
+    done: false,
+  },
+};
 
 const todoReducer = (
   state = initialState,
-  action: TodoAction
+  action: TodoAction,
 ): TodoState => {
-  switch(action.type) {
+  switch (action.type) {
     case TodoActionTypes.ADD_TODO: {
       return {
         ...state,
-        list: [...state.list, action.payload
-      ]
-    }
+        list: [...state.list, action.payload,
+        ],
+      };
     }
     case TodoActionTypes.UPDATE_TODO: {
       const temp = state.list.map((todo) => {
         if (action.payload.id === todo.id) {
-          return action.payload
+          return action.payload;
         }
-        return todo
-      })
-      return {
-        ...state,
-        list: temp
-      };
-    }
-    case TodoActionTypes.DELETE_TODO: {
-      const temp = state.list.filter((todo) => {
-        return todo.id !== action.payload.id
+        return todo;
       });
       return {
         ...state,
-        list: temp
+        list: temp,
+      };
+    }
+    case TodoActionTypes.DELETE_TODO: {
+      const temp = state.list.filter((todo) => todo.id !== action.payload.id);
+      return {
+        ...state,
+        list: temp,
       };
     }
     case TodoActionTypes.TOGGLE_TODO: {
@@ -54,21 +52,21 @@ const todoReducer = (
         if (action.payload.id === todo.id) {
           return {
             ...todo,
-            done: !todo.done
-          }
+            done: !todo.done,
+          };
         }
-        return todo
-      })
+        return todo;
+      });
       return {
         ...state,
-        list: temp
-      }
+        list: temp,
+      };
     }
     case TodoActionTypes.SELECT_TODO: {
       return {
         ...state,
-        selected: action.payload
-      }
+        selected: action.payload,
+      };
     }
     case TodoActionTypes.UNSELECT_TODO: {
       return {
@@ -76,13 +74,13 @@ const todoReducer = (
         selected: {
           id: '',
           content: '',
-          done: false
-        }
-      }
+          done: false,
+        },
+      };
     }
     default:
       return state;
   }
-}
+};
 
 export default todoReducer;

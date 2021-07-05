@@ -1,6 +1,9 @@
-import { createStyles, Dialog, makeStyles, Theme } from "@material-ui/core";
-import { Todo } from "../../types";
-import TodoForm from "./TodoForm";
+import React from 'react';
+import {
+  createStyles, Dialog, makeStyles, Theme,
+} from '@material-ui/core';
+import { Todo } from '../../types';
+import TodoForm from './TodoForm';
 
 interface TodoModalProps {
   selectedTodo?: Todo,
@@ -8,16 +11,14 @@ interface TodoModalProps {
   open: boolean;
 }
 
-const useStyle = makeStyles((theme: Theme) => {
-  return createStyles({
-    modalPaper: {
-      height: theme.spacing(100),
-      padding: theme.spacing(2)
-    }
-  })
-})
+const useStyle = makeStyles((theme: Theme) => createStyles({
+  modalPaper: {
+    height: theme.spacing(100),
+    padding: theme.spacing(2),
+  },
+}));
 
-const TodoModal: React.FC<TodoModalProps> = ({selectedTodo, handleCloseModal, open}) => {
+const TodoModal: React.FC<TodoModalProps> = ({ selectedTodo, handleCloseModal, open }) => {
   const classes = useStyle();
   return (
     <Dialog
@@ -25,13 +26,13 @@ const TodoModal: React.FC<TodoModalProps> = ({selectedTodo, handleCloseModal, op
       onClose={handleCloseModal}
       fullWidth
       classes={{
-        paper: classes.modalPaper
+        paper: classes.modalPaper,
       }}
-      id='todo-modal'
+      id="todo-modal"
     >
       <TodoForm todo={selectedTodo} update />
     </Dialog>
-  )
+  );
 };
 
 export default TodoModal;

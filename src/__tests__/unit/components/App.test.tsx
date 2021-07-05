@@ -4,7 +4,6 @@ import configureMockStore from 'redux-mock-store';
 import App from '../../../app/App';
 import { RootState } from '../../../app/redux/reducers';
 
-
 describe('App component unit test', () => {
   const mockStore = configureMockStore();
 
@@ -15,19 +14,20 @@ describe('App component unit test', () => {
         selected: {
           id: '',
           content: '',
-          done: false
-        }
+          done: false,
+        },
       },
       modal: {
-        open: false
-      }
-    }
-    const store = mockStore(initialState)
+        open: false,
+      },
+    };
+    const store = mockStore(initialState);
     const root = document.createElement('div');
     ReactDOM.render(
       <Provider store={store}>
         <App />
-      </Provider>
-  , root)
-  })
-})
+      </Provider>,
+      root,
+    );
+  });
+});

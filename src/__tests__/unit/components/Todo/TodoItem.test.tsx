@@ -1,66 +1,78 @@
 import { shallow } from 'enzyme';
-import TodoItem from '../../../../app/components/Todo/TodoItem'
+import TodoItem from '../../../../app/components/Todo/TodoItem';
 
 describe('TodoItem component unit tests', () => {
   it('should render todo item', () => {
     const component = shallow(
       <TodoItem
-        id='test-id'
-        content='test-content'
-        done={false}
+        todo={{
+          id: 'test-id',
+          content: 'test-content',
+          done: false,
+        }}
         handleDelete={jest.fn()}
         handleToggle={jest.fn()}
-      />
+        handleSelection={jest.fn()}
+      />,
     );
     const content = component.find('#content-test-id');
-    expect(content.text()).toEqual('test-content')
+    expect(content.text()).toEqual('test-content');
   });
 
   it('should strike-through content when done is true', () => {
     const component = shallow(
       <TodoItem
-        id='test-id'
-        content='test-content'
-        done
+        todo={{
+          id: 'test-id',
+          content: 'test-content',
+          done: true,
+        }}
         handleDelete={jest.fn()}
         handleToggle={jest.fn()}
-      />
+        handleSelection={jest.fn()}
+      />,
     );
     const content = component.find('#content-test-id');
     expect(content.prop('style')).toEqual({
-      textDecoration: 'line-through' 
+      textDecoration: 'line-through',
     });
-  })
+  });
 
   it('should open more menu when vertical menu is clicked', () => {
     const component = shallow(
       <TodoItem
-        id='test-id'
-        content='test-content'
-        done
+        todo={{
+          id: 'test-id',
+          content: 'test-content',
+          done: true,
+        }}
         handleDelete={jest.fn()}
         handleToggle={jest.fn()}
-      />
+        handleSelection={jest.fn()}
+      />,
     );
     const moreMenuClose = component.find('#more-menu-test-id');
     const moreMenuBtn = component.find('#vertical-menu-test-id');
 
-    expect(moreMenuClose.prop('className')).not.toContain('expanded')
+    expect(moreMenuClose.prop('className')).not.toContain('expanded');
     moreMenuBtn.simulate('click');
 
     const moreMenuOpen = component.find('#more-menu-test-id');
-    expect(moreMenuOpen.prop('className')).toContain('expanded')
+    expect(moreMenuOpen.prop('className')).toContain('expanded');
   });
 
   it('should close more menu when close menu button is clicked', () => {
     const component = shallow(
       <TodoItem
-        id='test-id'
-        content='test-content'
-        done
+        todo={{
+          id: 'test-id',
+          content: 'test-content',
+          done: true,
+        }}
         handleDelete={jest.fn()}
         handleToggle={jest.fn()}
-      />
+        handleSelection={jest.fn()}
+      />,
     );
     const moreMenuBtn = component.find('#vertical-menu-test-id');
     moreMenuBtn.simulate('click');
@@ -79,12 +91,15 @@ describe('TodoItem component unit tests', () => {
     const handleToggleSpy = jest.fn();
     const component = shallow(
       <TodoItem
-        id='test-id'
-        content='test-content'
-        done={false}
+        todo={{
+          id: 'test-id',
+          content: 'test-content',
+          done: false,
+        }}
         handleDelete={jest.fn()}
         handleToggle={handleToggleSpy}
-      />
+        handleSelection={jest.fn()}
+      />,
     );
 
     const uncheckedRadioBtn = component.find('#unchecked-circle-test-id');
@@ -92,7 +107,13 @@ describe('TodoItem component unit tests', () => {
 
     expect(handleToggleSpy).toHaveBeenCalled();
     expect(handleToggleSpy).toHaveBeenCalledWith('test-id');
-    component.setProps({ done: true });
+    component.setProps({
+      todo: {
+        id: 'test-id',
+        content: 'test-content',
+        done: true,
+      },
+    });
 
     const checkedRadioBtn = component.find('#checked-circle-test-id');
     checkedRadioBtn.simulate('click');
@@ -105,15 +126,18 @@ describe('TodoItem component unit tests', () => {
     const handleDeleteSpy = jest.fn();
     const component = shallow(
       <TodoItem
-        id='test-id'
-        content='test-content'
-        done
+        todo={{
+          id: 'test-id',
+          content: 'test-content',
+          done: true,
+        }}
         handleDelete={handleDeleteSpy}
         handleToggle={jest.fn()}
-      />
+        handleSelection={jest.fn()}
+      />,
     );
 
-    const moreMenuBtn = component.find('#vertical-menu-test-id');    
+    const moreMenuBtn = component.find('#vertical-menu-test-id');
     moreMenuBtn.simulate('click');
 
     const deleteBtn = component.find('#delete-icon-test-id');
@@ -122,4 +146,4 @@ describe('TodoItem component unit tests', () => {
     expect(handleDeleteSpy).toHaveBeenCalled();
     expect(handleDeleteSpy).toHaveBeenCalledWith('test-id');
   });
-})
+});
