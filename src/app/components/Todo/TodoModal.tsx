@@ -20,7 +20,6 @@ const useStyle = makeStyles((theme: Theme) => {
 
 const TodoModal: React.FC<TodoModalProps> = ({selectedTodo, handleCloseModal, open}) => {
   const classes = useStyle();
-  console.log('todo: ', selectedTodo)
   return (
     <Dialog
       open={open}
