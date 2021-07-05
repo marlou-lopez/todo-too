@@ -13,12 +13,13 @@ import clsx from "clsx";
 const useStyle = makeStyles((theme: Theme) => {
   return createStyles({
     paper: {
-      display: 'flex'
+      display: 'flex',
+      cursor: 'pointer',
     },
     content: {
-      padding: theme.spacing(2.5),
       '& .text': {
         width: '80%',
+        padding: theme.spacing(2.5)
       }
     },
     action: {
@@ -38,17 +39,21 @@ const useStyle = makeStyles((theme: Theme) => {
       '&.expanded': {
         width: theme.spacing(18.75),
         visibility: 'visible',
+        marginLeft: theme.spacing(1)
       }
     },
   })
 })
 
 const TodoItem: React.FC<Todo & {
-  handleToggle: (id: string) => void,
+  handleToggle: (id: string) => void;
   handleDelete: (id: string) => void;
-  }> = ({ id, content, done, handleDelete, handleToggle }) => {
+  handleSelection: () => void;
+}> = (todo) => {
+  const { id, content, done, handleDelete, handleToggle, handleSelection } = todo;
   const classes = useStyle();
   const [openMenu, setOpenMenu] = useState(false);
+
   return (
     <Paper key={id} className={classes.paper} elevation={2} >
       <Grid
@@ -58,7 +63,7 @@ const TodoItem: React.FC<Todo & {
         alignItems='center'
         className={classes.content}
       >
-        <Grid item className='text'>
+        <Grid item className='text' onClick={handleSelection}>
           <Typography
             id={`content-${id}`}
             style={{
@@ -73,13 +78,13 @@ const TodoItem: React.FC<Todo & {
               <CheckCircleIcon id={`checked-circle-${id}`} color='primary' onClick={(e) => handleToggle(id)} />
               : <RadioButtonUncheckedIcon id={`unchecked-circle-${id}`} color='primary' onClick={(e) => handleToggle(id)} />
           }
-          {!openMenu ? <MoreVertIcon id={`vertical-menu-${id}`} color='primary' onClick={(e) => {setOpenMenu(true)}} /> : null}
+          {!openMenu ? <MoreVertIcon id={`vertical-menu-${id}`} color='primary' onClick={(e) => { setOpenMenu(true) }} /> : null}
         </Grid>
       </Grid>
-      <Grid id={`more-menu-${id}`} className={clsx(classes.moreMenu, {'expanded': openMenu})}>
+      <Grid id={`more-menu-${id}`} className={clsx(classes.moreMenu, { 'expanded': openMenu })}>
         <EditIcon />
-        <DeleteIcon id={`delete-icon-${id}`}  onClick={(e) => handleDelete(id)} />
-        <CloseIcon id={`close-icon-${id}`} onClick={(e) => setOpenMenu(false)}/>
+        <DeleteIcon id={`delete-icon-${id}`} onClick={(e) => handleDelete(id)} />
+        <CloseIcon id={`close-icon-${id}`} onClick={(e) => setOpenMenu(false)} />
       </Grid>
     </Paper>
   )

@@ -24,7 +24,19 @@ interface ToggleTodoAction {
     id: string;
   }
 }
+interface SelectTodoAction {
+  type: TodoActionTypes.SELECT_TODO,
+  payload: Todo
+}
 
+interface UnselectTodoAction {
+  type: TodoActionTypes.UNSELECT_TODO
+}
 
-
-export type TodoAction = AddTodoAction | UpdateTodoAction | DeleteTodoAction | ToggleTodoAction;
+export type TodoAction =
+  AddTodoAction
+  | UpdateTodoAction
+  | DeleteTodoAction
+  | ToggleTodoAction
+  | SelectTodoAction
+  | UnselectTodoAction

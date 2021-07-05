@@ -14,11 +14,11 @@ const useStyle = makeStyles((theme: Theme) => {
       flexDirection: 'column'
     },
     form: {
-      marginBottom: theme.spacing(1),
+      marginBottom: theme.spacing(2),
       flexShrink: 0,
     },
     list: {
-      marginTop: theme.spacing(1),
+      marginTop: theme.spacing(2),
       marginBottom: theme.spacing(1),
       paddingTop: theme.spacing(1),
       paddingBottom: theme.spacing(1),

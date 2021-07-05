@@ -1,8 +1,10 @@
 import { combineReducers } from "redux";
+import modalReducer from "./modalReducer";
 import todoReducer from "./todoReducer";
 
 const reducers = combineReducers({
-  todos: todoReducer
+  todos: todoReducer,
+  modal: modalReducer
 })
 
 export default reducers;

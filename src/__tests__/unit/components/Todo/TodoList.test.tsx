@@ -9,18 +9,28 @@ const mockStore = configureStore<RootState>();
 
 describe('TodoList component unit tests', () => {
   const store = mockStore({
-    todos: [
-      {
-        id: 'test-id-one',
-        content: 'test-content-one',
-        done: false,
-      },
-      {
-        id: 'test-id-two',
-        content: 'test-content-two',
+    todos: {
+      list: [
+        {
+          id: 'test-id-one',
+          content: 'test-content-one',
+          done: false,
+        },
+        {
+          id: 'test-id-two',
+          content: 'test-content-two',
+          done: false
+        }
+      ],
+      selected: {
+        id: '',
+        content: '',
         done: false
       }
-    ]
+    },
+    modal: {
+      open: false
+    }
   })
 
   it('should render list', () => {

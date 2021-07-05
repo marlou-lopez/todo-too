@@ -10,7 +10,17 @@ describe('App component unit test', () => {
 
   it('renders without crashing', () => {
     const initialState: RootState = {
-      todos: []
+      todos: {
+        list: [],
+        selected: {
+          id: '',
+          content: '',
+          done: false
+        }
+      },
+      modal: {
+        open: false
+      }
     }
     const store = mockStore(initialState)
     const root = document.createElement('div');

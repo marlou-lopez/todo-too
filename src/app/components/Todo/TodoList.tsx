@@ -1,8 +1,9 @@
 import { Grid, makeStyles, Theme, createStyles } from "@material-ui/core";
 import { useDispatch } from "react-redux";
 import { useTypedSelector } from "../../hooks/useTypedSelector";
-import { deleteTodo, toggleTodo } from "../../redux/action-creators";
+import { closeTodoModal, deleteTodo, openTodoModal, selectTodo, toggleTodo, unselectTodo } from "../../redux/action-creators";
 import TodoItem from "./TodoItem";
+import TodoModal from "./TodoModal";
 
 const useStyle = makeStyles((theme: Theme) => {
   return createStyles({
@@ -17,8 +18,9 @@ const useStyle = makeStyles((theme: Theme) => {
 const TodoList: React.FC = () => {
   const classes = useStyle();
   const dispatch = useDispatch();
-  const todos = useTypedSelector((state) => state.todos);
-
+  const todos = useTypedSelector((state) => state.todos.list);
+  const modalState = useTypedSelector((state) => state.modal.open);
+  const selectedTodo = useTypedSelector((state) => state.todos.selected);
   return (
     <Grid className={classes.list}>
       {todos.map((todo) => {
@@ -32,9 +34,21 @@ const TodoList: React.FC = () => {
             handleToggle={() => {
               dispatch(toggleTodo(todo.id))
             }}
+            handleSelection={() => {
+              dispatch(openTodoModal());
+              dispatch(selectTodo(todo))
+            }}
           />
         )
       })}
+      <TodoModal
+        open={modalState}
+        handleCloseModal={() => {
+          dispatch(closeTodoModal())
+          dispatch(unselectTodo())
+        }}
+        selectedTodo={selectedTodo}
+      />
     </Grid>
   )
 };
