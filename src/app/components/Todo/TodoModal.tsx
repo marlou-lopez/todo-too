@@ -3,7 +3,7 @@ import { Todo } from "../../types";
 import TodoForm from "./TodoForm";
 
 interface TodoModalProps {
-  selectedTodo: Todo,
+  selectedTodo?: Todo,
   handleCloseModal: () => void;
   open: boolean;
 }
@@ -27,6 +27,7 @@ const TodoModal: React.FC<TodoModalProps> = ({selectedTodo, handleCloseModal, op
       classes={{
         paper: classes.modalPaper
       }}
+      id='todo-modal'
     >
       <TodoForm todo={selectedTodo} update />
     </Dialog>

@@ -1,4 +1,4 @@
-import { addTodo, deleteTodo, toggleTodo } from "../../../../app/redux/action-creators";
+import { addTodo, deleteTodo, selectTodo, toggleTodo } from "../../../../app/redux/action-creators";
 import todoReducer, { TodoState } from "../../../../app/redux/reducers/todoReducer"
 
 const initialState: TodoState = {
@@ -99,4 +99,43 @@ describe('todoReducer unit test', () => {
       }
     });
   });
+  
+  it('should handle selection of todo', () => {
+    const previousState: TodoState = {
+      list: [{
+        id: 'test-id-one',
+        content: 'test-content-one',
+        done: true
+      }, {
+        id: 'test-id-two',
+        content: 'test-content-two',
+        done: false
+      }],
+      selected: {
+        id: '',
+        content: '',
+        done: false
+      }
+    }
+    expect(todoReducer(previousState, selectTodo({
+      id: 'test-id-one',
+      content: 'test-content-one',
+      done: true
+    }))).toEqual({
+      list: [{
+        id: 'test-id-one',
+        content: 'test-content-one',
+        done: true
+      }, {
+        id: 'test-id-two',
+        content: 'test-content-two',
+        done: false
+      }],
+      selected: {
+        id: 'test-id-one',
+        content: 'test-content-one',
+        done: true
+      }
+    })
+  })
 })

@@ -7,12 +7,11 @@ import { addTodo, updateTodo } from '../../redux/action-creators';
 import { Todo } from '../../types';
 
 interface TodoFormProps {
-  // onSubmitAction: () => void;
   update?: boolean;
   todo?: Todo;
 }
 
-const TodoForm: React.FC<TodoFormProps> = ({todo, update = false}) => {
+const TodoForm: React.FC<TodoFormProps> = ({ todo, update = false }) => {
   const dispatch = useDispatch();
   const [content, setContent] = useState<string>(todo?.content || '');
 
@@ -36,9 +35,9 @@ const TodoForm: React.FC<TodoFormProps> = ({todo, update = false}) => {
           content,
           done: false
         })
-      )
+      );
+      setContent('')
     }
-    setContent('')
   }
 
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -60,7 +59,7 @@ const TodoForm: React.FC<TodoFormProps> = ({todo, update = false}) => {
         fullWidth
         value={content}
         onChange={onChange}
-        label={update ? 'Update todo' : 'Add todo'}
+        label={update ? null : 'Add todo'}
         onKeyDown={textAreaOnEnter}
       />
     </form>
